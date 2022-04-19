@@ -1,16 +1,25 @@
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 5000;
+const express = require('express')
+const app = express()
+const http = require('http').createServer(app)
+const path = require('path')
+const io = require('socket.io')(http)
+const port = process.env.PORT || 5000
 
-app.set("view engine", "ejs");
-app.set("views", "./views");
+app.use(express.static(path.resolve('public')));
 
-app.use(express.static("public"));
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+io.on('connection', (socket) => {
+  console.log('a user connected')
+
+  socket.on('message', (message) => {
+    io.emit('message', message)
+  })
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
+  })
 });
 
-app.get("/", function (request, response) {
-  response.render('index')
+http.listen(port, () => {
+  console.log('listening on port ', 5000)
 });
