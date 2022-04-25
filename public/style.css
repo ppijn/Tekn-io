@@ -11,7 +11,7 @@ body {
   overflow: hidden;
   min-height: 100vh;
   min-width: 100vw;
-  background-color: #baa;
+  background-color: rgba(103, 234, 248, 0.6);
 }
 
 main {
@@ -24,26 +24,36 @@ main {
   align-items: center;
 }
 
-section {
-  width: 20rem;
-  height: 30rem;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+h1 {
+  text-align: center;
+  padding: 1rem 0 0 0;
+}
+
+/* Chat Section */
+
+.chat {
+  width: 350px;
+  height: 500px;
+  /* background: rgba(255, 255, 255, 0.6); */
+  /* border-radius: 2rem; */
+  background-color: rgb(231, 254, 255);
+  border: 3px solid rgb(74, 74, 74);
+  border-left: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 22px;
 }
 
-section h1 {
+.chat h2 {
   margin: 0;
-  padding: 0;
-  padding-top: 1rem;
+  padding: 1rem 0 1rem 0;
+  /* padding-top: 1rem; */
   text-transform: uppercase;
   font-size: 1rem;
 }
 
-section ul {
+.chat ul {
   margin: 0;
   padding: 0.2em;
   list-style-type: none;
@@ -53,11 +63,12 @@ section ul {
 }
 
 ::-webkit-scrollbar {
-  background: transparent;
+  /* background: transparent; */
+  display: none;
 }
 
-section ul > li {
-  background-color: #bbaaaa30;
+.chat ul > li {
+  background-color: #aaaaaa40;
   border-radius: 10px;
   margin-bottom: 5px;
   padding: 0.5rem 1rem;
@@ -66,7 +77,7 @@ section ul > li {
   font-size: 0.8rem;
 }
 
-section form {
+.chat form {
   margin: 0 0 1rem 0;
   padding: 0;
   width: 18rem;
@@ -74,58 +85,76 @@ section form {
   display: flex;
 }
 
-section form input[type='text'] {
+.chat form input[type="text"] {
   margin: 0;
   padding: 0 1rem;
   border: none;
   height: 2rem;
   flex-grow: 2;
   background: rgb(239, 238, 238);
-  border-top-left-radius: 2rem;
+  border-top-left-radius: 0.4rem;
   border: 3px solid rgb(81, 77, 77);
-  border-bottom-left-radius: 2rem;
+  border-bottom-left-radius: 0.4rem;
   border: 0;
   opacity: 80%;
   outline: none;
 }
 
-section form input[type='text']:focus {
-  border: .5px solid rgb(80, 70, 70)
-
+.chat form input[type="text"]:focus {
+  border: 0.5px solid rgb(80, 70, 70);
 }
 
-section form > button {
+.chat form > button {
   padding: 0 0.6rem 0 0.4rem;
   width: 2rem;
   background: #baa;
   border: 3px solid rgb(81, 77, 77);
-  border-top-right-radius: 2rem;
-  border-bottom-right-radius: 2rem;
+  border-top-right-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
   border: 0;
   opacity: 80%;
   outline: none;
   transition: 0.2s;
 }
 
-section form > button span {
+.chat form > button span {
   display: none;
 }
 
-section form > button::after {
-  content: '>';
-  font-family: 'Courier New', Courier, monospace;
+.chat form > button::after {
+  content: ">";
+  font-family: "Courier New", Courier, monospace;
   font-weight: 700;
   /* background-color: #baa; */
-  padding: .3em;
+  padding: 0.3em;
   border-radius: 70px;
   color: white;
   width: 50px;
 }
 
-section form > button:hover {
-  padding-left: .7rem;
+.chat form > button:hover {
+  padding-left: 0.7rem;
 }
 
-section form > button:active {
-  padding-left: .5rem;
+.chat form > button:active {
+  padding-left: 0.5rem;
+}
+
+/* Canvas section */
+
+.canvas p {
+  padding-bottom: 0.2rem;
+}
+
+.paint-canvas {
+  border: 3px rgb(74, 74, 74) solid;
+  border-right: none;
+  display: block;
+  /* margin: 1rem; */
+  margin-right: 0;
+  background-color: white;
+}
+
+.color-picker {
+  margin: 1rem 1rem 0 1rem;
 }

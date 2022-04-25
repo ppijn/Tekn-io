@@ -4,7 +4,7 @@
   "description": "Real time web app",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/ppijn/realtimechat#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^1.35.2",
+    "dotenv": "^16.0.0",
     "ejs": "^3.0.2",
     "express": "^4.17.3",
     "nodemon": "^2.0.15",
