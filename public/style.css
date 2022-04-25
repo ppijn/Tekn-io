@@ -3,15 +3,30 @@
   padding: 0;
 }
 
+:root {
+  --blue: #003049;
+  --red: #d62828;
+  --orange: #f77f00;
+  --geel: #fcbf49;
+  --beige: #eae2b7;
+}
+
+@font-face {
+  font-family: "Grotesk";
+  src: url("./Grotesk-Medium.woff") format("woff");
+  font-weight: 100;
+  font-display: swap;
+}
+
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Grotesk", sans-serif;
   overflow: hidden;
   min-height: 100vh;
   min-width: 100vw;
-  background-color: rgba(103, 234, 248, 0.6);
+  background-color: var(--geel);
 }
 
 main {
@@ -26,6 +41,7 @@ main {
 
 h1 {
   text-align: center;
+  font-family: "Grotesk", sans-serif;
   padding: 1rem 0 0 0;
 }
 
@@ -34,15 +50,15 @@ h1 {
 .chat {
   width: 350px;
   height: 500px;
-  /* background: rgba(255, 255, 255, 0.6); */
-  /* border-radius: 2rem; */
-  background-color: rgb(231, 254, 255);
+  background-color: var(--beige);
   border: 3px solid rgb(74, 74, 74);
-  border-left: 1px solid black;
+  border-left: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 22px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  margin-bottom: 17px;
 }
 
 .chat h2 {
@@ -60,6 +76,7 @@ h1 {
   flex-grow: 2;
   width: 18em;
   overflow-y: scroll;
+  position: relative;
 }
 
 ::-webkit-scrollbar {
@@ -68,13 +85,21 @@ h1 {
 }
 
 .chat ul > li {
-  background-color: #aaaaaa40;
+  background-color: #ffffff;
   border-radius: 10px;
   margin-bottom: 5px;
+  margin-left: 20%;
   padding: 0.5rem 1rem;
   overflow: hidden;
   overflow-wrap: break-word;
   font-size: 0.8rem;
+}
+
+.chat li:before {
+  content: "user1";
+  position: absolute;
+  left: 0;
+  color: var(--red);
 }
 
 .chat form {
@@ -89,11 +114,12 @@ h1 {
   margin: 0;
   padding: 0 1rem;
   border: none;
+  font-family: "Grotesk", sans-serif;
+
   height: 2rem;
   flex-grow: 2;
-  background: rgb(239, 238, 238);
+  background: var(--geel);
   border-top-left-radius: 0.4rem;
-  border: 3px solid rgb(81, 77, 77);
   border-bottom-left-radius: 0.4rem;
   border: 0;
   opacity: 80%;
@@ -107,7 +133,7 @@ h1 {
 .chat form > button {
   padding: 0 0.6rem 0 0.4rem;
   width: 2rem;
-  background: #baa;
+  background: var(--orange);
   border: 3px solid rgb(81, 77, 77);
   border-top-right-radius: 0.4rem;
   border-bottom-right-radius: 0.4rem;
@@ -123,8 +149,8 @@ h1 {
 
 .chat form > button::after {
   content: ">";
-  font-family: "Courier New", Courier, monospace;
   font-weight: 700;
+  font-family: "Grotesk", sans-serif;
   /* background-color: #baa; */
   padding: 0.3em;
   border-radius: 70px;
@@ -144,17 +170,80 @@ h1 {
 
 .canvas p {
   padding-bottom: 0.2rem;
+  padding: 0.8em;
+  background-color: var(--beige);
+  width: 300px;
+  margin-bottom: 0.4em;
+  border-radius: 10px;
+  box-shadow: 0 0 4px var(--geel);
 }
 
 .paint-canvas {
   border: 3px rgb(74, 74, 74) solid;
   border-right: none;
+  width: 500px;
+  height: 500px;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   display: block;
-  /* margin: 1rem; */
+  margin-bottom: 5px;
   margin-right: 0;
   background-color: white;
+  cursor: url("../img/brush.png"), auto;
 }
 
 .color-picker {
   margin: 1rem 1rem 0 1rem;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 30% 70% 36% 64% / 30% 30% 70% 70%;
+
+  width: 40px;
+  height: 40px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 30% 70% 36% 64% / 30% 30% 70% 70%;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 30% 70% 36% 64% / 30% 30% 70% 70%;
+}
+
+@media only screen and (max-width: 900px) {
+  .paint-canvas {
+    width: 300px;
+    height: 300px;
+  }
+
+  .chat {
+    height: 300px;
+    width: 210px;
+  }
+
+  .chat form > button::after {
+    width: 30px;
+  }
+
+  .chat form {
+    width: 10rem;
+  }
+
+  .chat form > button {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .chat form input[type="text"] {
+    height: 1.2rem;
+    width: 10rem;
+  }
+
+  .chat ul {
+    width: 10rem;
+  }
 }
