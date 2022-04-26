@@ -96,10 +96,10 @@ h1 {
 }
 
 .chat li:before {
-  content: "user1";
+  content: attr(username);
   position: absolute;
   left: 0;
-  color: var(--red);
+  color: var(--blue);
 }
 
 .chat form {
@@ -127,7 +127,7 @@ h1 {
 }
 
 .chat form input[type="text"]:focus {
-  border: 0.5px solid rgb(80, 70, 70);
+  box-shadow: 0 0 5px var(--orange) inset;
 }
 
 .chat form > button {
@@ -176,6 +176,10 @@ h1 {
   margin-bottom: 0.4em;
   border-radius: 10px;
   box-shadow: 0 0 4px var(--geel);
+}
+
+.canvas p strong {
+  color: var(--red)
 }
 
 .paint-canvas {

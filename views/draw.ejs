@@ -1,33 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Realtimeapp</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+<%- include('./partials/head') %>
     <h1>Guess the drawing</h1>
     <main>
       <section class="canvas">
-        <p>your word: ...</p>
+        <p>your word: <strong><%= word %></strong></p>
         <canvas class="js-paint paint-canvas" width="500" height="500"></canvas>
         <form class="picker">
           <input type="color" class="js-color-picker color-picker" />
           <input
             type="range"
             class="js-line-range"
-            min="1"
+            min="5"
             max="72"
-            value="1"
+            value="5"
           />
-          <label class="js-range-value">1</label>px
+          <label class="js-range-value">5</label>px
         </form>
       </section>
       <section class="chat">
         <h2>GUESS THE DRAWING!</h2>
-        <ul></ul>
+        <ul class="users"></ul>
         <form class="chat-input">
           <input type="text" autocomplete="off" />
           <button></button>
@@ -36,5 +27,5 @@
     </main>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/script.js"></script>
-  </body>
-</html>
+
+    <%- include('./partials/foot') %>
