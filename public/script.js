@@ -14,13 +14,32 @@ console.log(username);
 
 socket.emit("newRound");
 
+let startDrawing;
+let stopDrawing;
+let onMouseMove;
+
 socket.on("activePlayer", (playerId) => {
   console.log(playerId);
+  console.log(socket.id);
   if (socket.id == playerId) {
     magTekenen = true;
+    startDrawing = (event) => {
+      socket.emit("start", [event.offsetX, event.offsetY]);
+    };
+    stopDrawing = (event) => {
+      socket.emit("stop", [event.offsetX, event.offsetY]);
+    };
+    onMouseMove = (event) => {
+      socket.emit("move", [event.offsetX, event.offsetY]);
+    };
+    paintCanvas.addEventListener("mousedown", startDrawing, false);
+    paintCanvas.addEventListener("mousemove", throttle(onMouseMove, 1), false);
+    paintCanvas.addEventListener("mouseup", stopDrawing, false);
+    paintCanvas.addEventListener("mouseout", stopDrawing, false);
     console.log("Jij bent de actieve speler");
   } else {
     magTekenen = false;
+
     console.log("Jij mag niet tekenen..");
   }
 });
@@ -72,9 +91,6 @@ let x = 0,
 let isMouseDown = false;
 
 // Stap 1, begin met tekenen
-const startDrawing = (event) => {
-  socket.emit("start", [event.offsetX, event.offsetY]);
-};
 
 socket.on("start", (coord) => {
   console.log("Start drawing from: ", coord);
@@ -83,9 +99,6 @@ socket.on("start", (coord) => {
 });
 
 // Stap 2, stop met tekenen
-const stopDrawing = (event) => {
-  socket.emit("stop", [event.offsetX, event.offsetY]);
-};
 
 socket.on("stop", (coord) => {
   console.log("Stop drawing to: ", coord);
@@ -97,9 +110,6 @@ socket.on("stop", (coord) => {
 
 // Stap 3, teken een lijn als de muis beweegt
 // Stuur een socket event
-const onMouseMove = (event) => {
-  socket.emit("move", [event.offsetX, event.offsetY]);
-};
 
 // Socket event om te tekenen als de server iets door geeft
 socket.on("move", (coord) => {
@@ -146,11 +156,6 @@ function throttle(callback, delay) {
     }
   };
 }
-
-paintCanvas.addEventListener("mousedown", startDrawing, false);
-paintCanvas.addEventListener("mousemove", throttle(onMouseMove, 1), false);
-paintCanvas.addEventListener("mouseup", stopDrawing, false);
-paintCanvas.addEventListener("mouseout", stopDrawing, false);
 
 function drawEvent(draw) {
   // console.log(draw);
