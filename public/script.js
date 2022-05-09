@@ -2,17 +2,30 @@ let socket = io();
 let messages = document.querySelector(".chat ul");
 let chatInput = document.querySelector(".chat form input");
 
+// boolean met mag tekenen = false
+let magTekenen = false;
+
 // Get username
-
 let search = window.location.search;
-
 let params = new URLSearchParams(search);
 let username = params.get("username");
 
 console.log(username);
 
-// Chat section
+socket.emit("newRound");
 
+socket.on("activePlayer", (playerId) => {
+  console.log(playerId);
+  if (socket.id == playerId) {
+    magTekenen = true;
+    console.log("Jij bent de actieve speler");
+  } else {
+    magTekenen = false;
+    console.log("Jij mag niet tekenen..");
+  }
+});
+
+// Chat section
 document.querySelector(".chat form").addEventListener("submit", (event) => {
   event.preventDefault();
   if (chatInput.value) {
@@ -70,26 +83,40 @@ socket.on("start", (coord) => {
 });
 
 // Stap 2, stop met tekenen
+const stopDrawing = (event) => {
+  socket.emit("stop", [event.offsetX, event.offsetY]);
+};
 
-const stopDrawing = (e) => {
+socket.on("stop", (coord) => {
+  console.log("Stop drawing to: ", coord);
   if (!isMouseDown) return;
   isMouseDown = false;
-  drawLine(e);
-};
+  [x, y] = coord;
+  drawLine(coord);
+});
 
 // Stap 3, teken een lijn als de muis beweegt
-
-const onMouseMove = (e) => {
-  if (!isMouseDown) return;
-  drawLine(e);
+// Stuur een socket event
+const onMouseMove = (event) => {
+  socket.emit("move", [event.offsetX, event.offsetY]);
 };
 
-//  Start met tekenen
+// Socket event om te tekenen als de server iets door geeft
+socket.on("move", (coord) => {
+  console.log("line was drawn");
+  if (!isMouseDown) return;
+  // [x, y] = coord;
 
+  drawLine(coord);
+});
+
+// if om socket emits voor magtekenen en woord diplay none
+
+//  Start met tekenen
 const drawLine = (event) => {
   if (isMouseDown) {
-    const newX = event.offsetX;
-    const newY = event.offsetY;
+    const newX = event[0];
+    const newY = event[1];
     context.beginPath();
     context.moveTo(x, y);
     context.lineTo(newX, newY);
@@ -105,9 +132,8 @@ const drawLine = (event) => {
       color: context.strokeStyle,
     });
   }
+  socket.on("drawing", drawEvent);
 };
-
-socket.on("drawing", drawEvent);
 
 function throttle(callback, delay) {
   var previousCall = new Date().getTime();
