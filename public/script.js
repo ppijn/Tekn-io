@@ -1,7 +1,13 @@
 let socket = io();
 let messages = document.querySelector(".chat ul");
 let chatInput = document.querySelector(".chat form input");
-
+const wordInput = document.querySelector(".canvas p");
+const canvasArea = document.querySelector(".paint-canvas");
+const picker = document.querySelector(".picker");
+const guessingText = document.querySelector(".chat h2:nth-of-type(2)");
+const drawingText = document.querySelector(".chat h2:nth-of-type(3)");
+const reloadButton = document.querySelector(".reload");
+const won = document.querySelector(".overlay");
 // boolean met mag tekenen = false
 let magTekenen = false;
 
@@ -37,11 +43,24 @@ socket.on("activePlayer", (playerId) => {
     paintCanvas.addEventListener("mouseup", stopDrawing, false);
     paintCanvas.addEventListener("mouseout", stopDrawing, false);
     console.log("Jij bent de actieve speler");
+    wordInput.style.setProperty("visibility", "visible");
+    picker.style.setProperty("visibility", "visible");
+    reloadButton.style.setProperty("visibility", "visible");
+    drawingText.style.setProperty("display", "block");
   } else {
     magTekenen = false;
+    canvasArea.style.setProperty("cursor", "default");
+    guessingText.style.setProperty("display", "block");
 
     console.log("Jij mag niet tekenen..");
   }
+});
+
+socket.on("won", (username) => {
+  won.style.setProperty("visibility", "visible");
+
+  won.innerHTML += `<img src="./img/crown.png" alt="User has won!" class="crown" /><p>${username} has won!</p>`;
+  // won.innerHTML = username;
 });
 
 // Chat section
@@ -57,9 +76,8 @@ socket.on("message", (message) => {
   let li = document.createElement("li");
   li.textContent = message.text;
   li.setAttribute("username", message.name);
-
+  socket.emit("guessText", { guess: message.text, guesser: message.name });
   messages.insertAdjacentElement("beforeend", li);
-
   messages.scrollTop = messages.scrollHeight;
 });
 
@@ -93,7 +111,6 @@ let isMouseDown = false;
 // Stap 1, begin met tekenen
 
 socket.on("start", (coord) => {
-  console.log("Start drawing from: ", coord);
   isMouseDown = true;
   [x, y] = coord;
 });
@@ -101,26 +118,19 @@ socket.on("start", (coord) => {
 // Stap 2, stop met tekenen
 
 socket.on("stop", (coord) => {
-  console.log("Stop drawing to: ", coord);
   if (!isMouseDown) return;
   isMouseDown = false;
   [x, y] = coord;
   drawLine(coord);
 });
 
-// Stap 3, teken een lijn als de muis beweegt
-// Stuur een socket event
-
 // Socket event om te tekenen als de server iets door geeft
 socket.on("move", (coord) => {
-  console.log("line was drawn");
   if (!isMouseDown) return;
   // [x, y] = coord;
 
   drawLine(coord);
 });
-
-// if om socket emits voor magtekenen en woord diplay none
 
 //  Start met tekenen
 const drawLine = (event) => {
@@ -170,108 +180,19 @@ function drawEvent(draw) {
   context.closePath();
 }
 
-// (function() {
+// Reload button
 
-//   var socket = io();
-//   var canvas = document.getElementsByClassName('paint-canvas')[0];
-//   var colors = document.getElementsByClassName('color');
-//   var context = canvas.getContext('2d');
+socket.on("reload", () => {
+  location.reload();
+  // hier waarschijnlijk
+});
 
-//   var current = {
-//     color: 'black'
-//   };
-//   var drawing = false;
+reloadButton.addEventListener(
+  "click",
+  () => {
+    socket.emit("reload");
+  },
+  false
+);
 
-//   canvas.addEventListener('mousedown', onMouseDown, false);
-//   canvas.addEventListener('mouseup', onMouseUp, false);
-//   canvas.addEventListener('mouseout', onMouseUp, false);
-//   canvas.addEventListener('mousemove', throttle(onMouseMove, 10), false);
-
-//   //Touch support for mobile devices
-//   canvas.addEventListener('touchstart', onMouseDown, false);
-//   canvas.addEventListener('touchend', onMouseUp, false);
-//   canvas.addEventListener('touchcancel', onMouseUp, false);
-//   canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false);
-
-//   for (var i = 0; i < colors.length; i++){
-//     colors[i].addEventListener('click', onColorUpdate, false);
-//   }
-
-//   socket.on('drawing', onDrawingEvent);
-
-//   window.addEventListener('resize', onResize, false);
-//   onResize();
-
-//   function drawLine(x0, y0, x1, y1, color, emit){
-//     context.beginPath();
-//     context.moveTo(x0, y0);
-//     console.log(x0, y0);
-//     context.lineTo(x1, y1);
-//     context.strokeStyle = color;
-//     context.lineWidth = 2;
-//     context.stroke();
-//     context.closePath();
-
-//     if (!emit) { return; }
-//     var w = canvas.width;
-//     var h = canvas.height;
-
-//     socket.emit('drawing', {
-//       x0: x0 / w,
-//       y0: y0 / h,
-//       x1: x1 / w,
-//       y1: y1 / h,
-//       color: color
-//     });
-//   }
-
-//   function onMouseDown(e){
-//     drawing = true;
-//     current.x = e.offsetX||e.touches[0].offsetX;
-//     current.y = e.offsetY||e.touches[0].offsetY;
-//   }
-
-//   function onMouseUp(e){
-//     if (!drawing) { return; }
-//     drawing = false;
-//     // drawLine(current.x, current.y, e.clientX||e.touches[0].clientX, e.clientY||e.touches[0].clientY, current.color, true);
-//   }
-
-//   function onMouseMove(e){
-//     if (!drawing) { return; }
-
-//     drawLine(current.x, current.y, e.offsetX||e.touches[0].offsetX, e.offsetY||e.touches[0].offsetY, current.color, true);
-//     current.x = e.clientX||e.touches[0].offsetX;
-//     current.y = e.clientY||e.touches[0].offsetY;
-//   }
-
-//   function onColorUpdate(e){
-//     current.color = e.target.className.split(' ')[1];
-//   }
-
-//   // limit the number of events per second
-//   function throttle(callback, delay) {
-//     var previousCall = new Date().getTime();
-//     return function() {
-//       var time = new Date().getTime();
-
-//       if ((time - previousCall) >= delay) {
-//         previousCall = time;
-//         callback.apply(null, arguments);
-//       }
-//     };
-//   }
-
-//   function onDrawingEvent(data){
-//     var w = canvas.width;
-//     var h = canvas.height;
-//     drawLine(data.x0, data.y0, data.x1, data.y1, data.color);
-//   }
-
-//   // make the canvas fill its parent
-//   function onResize() {
-//     // canvas.width = window.innerWidth;
-//     // canvas.height = window.innerHeight;
-//   }
-
-// })();
+// de init van spel bij reload opnieuw aanroepen

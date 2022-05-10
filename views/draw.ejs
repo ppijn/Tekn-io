@@ -1,5 +1,5 @@
 <%- include('./partials/head') %>
-<h1>Guess the drawing</h1>
+<img src="./img/tekn-io.svg" alt="logo of Teken io" class="logo-draw" />
 <main>
   <section class="canvas">
     <p>your word: <strong><%= word %></strong></p>
@@ -10,36 +10,21 @@
       <label class="js-range-value">5</label>px
     </form>
   </section>
-  <!-- <section class="canvas">
-        <p>your word: <strong><%= word %></strong></p>
-        <canvas class="js-paint paint-canvas" width="500" height="500"></canvas>
-        <div class="colors">
-          <div class="color black"></div>
-          <div class="color red"></div>
-          <div class="color green"></div>
-          <div class="color blue"></div>
-          <div class="color yellow"></div>
-        </div>
-        <form class="picker">
-          <input type="color" class="js-color-picker color-picker" />
-          <input
-            type="range"
-            class="js-line-range"
-            min="5"
-            max="72"
-            value="5"
-          />
-          <label class="js-range-value">5</label>px
-        </form>
-      </section> -->
+
   <section class="chat">
     <h2>GUESS THE DRAWING!</h2>
+    <h2>You are guessing!</h2>
+    <h2>You are drawing!</h2>
     <ul class="users"></ul>
     <form class="chat-input">
       <input type="text" autocomplete="off" />
       <button></button>
     </form>
+    <div class="overlay">
+      <!-- <img src="./img/crown.png" alt="User has won!" class="crown" /> -->
+    </div>
   </section>
+  <button class="reload">Start New Game</button>
 </main>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/script.js"></script>

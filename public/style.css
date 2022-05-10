@@ -45,6 +45,61 @@ h1 {
   padding: 1rem 0 0 0;
 }
 
+.logo-draw {
+  width: 200px;
+  position: absolute;
+  left: 45%;
+  top: 2%;
+}
+
+/* index styling */
+.logo-index {
+  width: 500px;
+  position: absolute;
+  left: 32%;
+  top: 20%;
+}
+
+.submit-btn {
+  padding: 1em;
+  border-radius: 20px;
+  border: 3px solid black;
+  cursor: pointer;
+  font-family: "Grotesk", sans-serif;
+}
+
+.submit-btn:hover {
+  background-color: var(--beige);
+  box-shadow: 0 0 5px var(--orange) inset;
+  border: 3px solid black;
+  font-weight: 700;
+  color: var(--red);
+}
+
+#username {
+  padding: 1em;
+  border: 3px solid black;
+  border-radius: 20px;
+  font-family: "Grotesk", sans-serif;
+}
+.chat h2:nth-of-type(2) {
+  text-align: center;
+  margin: 0 auto;
+  display: none;
+  font-size: 12px;
+  color: var(--blue);
+  padding-bottom: 0.5rem;
+}
+
+.chat h2:nth-of-type(3) {
+  text-align: center;
+  margin: 0 auto;
+  display: none;
+  color: var(--red);
+  font-size: 12px;
+  padding-bottom: 0.5rem;
+}
+
 /* Chat Section */
 
 .chat {
@@ -61,9 +116,9 @@ h1 {
   margin-bottom: 17px;
 }
 
-.chat h2 {
+.chat h2:first-of-type {
   margin: 0;
-  padding: 1rem 0 1rem 0;
+  padding: 1rem 0 0.5rem 0;
   /* padding-top: 1rem; */
   text-transform: uppercase;
   font-size: 1rem;
@@ -88,7 +143,7 @@ h1 {
   background-color: #ffffff;
   border-radius: 10px;
   margin-bottom: 5px;
-  margin-left: 20%;
+  margin-left: 24%;
   padding: 0.5rem 1rem;
   overflow: hidden;
   overflow-wrap: break-word;
@@ -166,6 +221,28 @@ h1 {
   padding-left: 0.5rem;
 }
 
+/* Reload button */
+
+.reload {
+  padding: 1em;
+  border-radius: 20px;
+  border: 3px solid black;
+  font-family: "Grotesk", sans-serif;
+  position: absolute;
+  cursor: pointer;
+  right: 10%;
+  visibility: hidden;
+  top: 77%;
+}
+
+.reload:hover {
+  background-color: var(--beige);
+  box-shadow: 0 0 5px var(--orange) inset;
+  border: 3px solid black;
+  font-weight: 700;
+  color: var(--red);
+}
+
 /* Canvas section */
 
 .canvas p {
@@ -176,6 +253,7 @@ h1 {
   margin-bottom: 0.4em;
   border-radius: 10px;
   box-shadow: 0 0 4px var(--geel);
+  visibility: hidden;
 }
 
 .canvas p strong {
@@ -194,6 +272,10 @@ h1 {
   margin-right: 0;
   background-color: white;
   cursor: url("../img/brush.png"), auto;
+}
+
+.picker {
+  visibility: hidden;
 }
 
 .color-picker {
@@ -218,6 +300,29 @@ input[type="color"]::-webkit-color-swatch {
   border-radius: 30% 70% 36% 64% / 30% 30% 70% 70%;
 }
 
+/* Overlay */
+.overlay {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  display: flex;
+  background-color: #fcbf49;
+  box-shadow: 0 0 10px #f77f00 inset;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  position: absolute;
+  visibility: hidden;
+  top: 30%;
+}
+
+.overlay p {
+  color: white;
+  font-weight: 700;
+  margin-top: 1em;
+}
+
 @media only screen and (max-width: 900px) {
   .paint-canvas {
     width: 300px;
@@ -227,6 +332,7 @@ input[type="color"]::-webkit-color-swatch {
   .chat {
     height: 300px;
     width: 210px;
+    position: relative;
   }
 
   .chat form > button::after {
