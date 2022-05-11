@@ -10,6 +10,7 @@ const res = require("express/lib/response");
 let currentWord = "";
 let wordArray = [];
 let users = [];
+let usernames = {};
 let activePlayer = "";
 let randomWord = "";
 
@@ -47,6 +48,11 @@ io.on("connection", (socket) => {
     io.emit("message", message);
   });
 
+  socket.on("new-user", (username) => {
+    usernames[socket.id] = username;
+    io.emit("userList", usernames);
+  });
+
   socket.on("guessText", (guess, guesser) => {
     // matchen!
     console.log(guess, wordArray.data[randomWord].word);
@@ -61,6 +67,9 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     users.splice(users.indexOf(socket.id), 1); // 2nd parameter means remove one item only
+    // haal username weg uit lijstje
+    delete usernames[socket.id];
+    io.emit("userList", usernames);
   });
 
   socket.on("newRound", () => {

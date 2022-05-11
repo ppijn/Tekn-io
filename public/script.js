@@ -1,5 +1,6 @@
 let socket = io();
 let messages = document.querySelector(".chat ul");
+let userList = document.querySelector(".userlist");
 let chatInput = document.querySelector(".chat form input");
 const wordInput = document.querySelector(".canvas p");
 const canvasArea = document.querySelector(".paint-canvas");
@@ -16,7 +17,7 @@ let search = window.location.search;
 let params = new URLSearchParams(search);
 let username = params.get("username");
 
-console.log(username);
+socket.emit("new-user", username);
 
 socket.emit("newRound");
 
@@ -63,6 +64,19 @@ socket.on("won", (username) => {
   // won.innerHTML = username;
 });
 
+// User list
+
+socket.on("userList", (users) => {
+  console.log(users);
+  userList.innerHTML = "";
+  Object.values(users).forEach((user) => {
+    let liUsers = document.createElement("li");
+    liUsers.textContent = user;
+    userList.appendChild(liUsers);
+    userList.insertAdjacentElement("beforeend", liUsers);
+  });
+});
+
 // Chat section
 document.querySelector(".chat form").addEventListener("submit", (event) => {
   event.preventDefault();
@@ -73,11 +87,11 @@ document.querySelector(".chat form").addEventListener("submit", (event) => {
 });
 
 socket.on("message", (message) => {
-  let li = document.createElement("li");
-  li.textContent = message.text;
-  li.setAttribute("username", message.name);
+  let liChat = document.createElement("li");
+  liChat.textContent = message.text;
+  liChat.setAttribute("username", message.name);
   socket.emit("guessText", { guess: message.text, guesser: message.name });
-  messages.insertAdjacentElement("beforeend", li);
+  messages.insertAdjacentElement("beforeend", liChat);
   messages.scrollTop = messages.scrollHeight;
 });
 
