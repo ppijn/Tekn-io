@@ -45,7 +45,18 @@ Once the client opens the website they get send to index.ejs where they see a us
 
 ### Roles
 Once they have joined the room, they will be assigned a role either drawing or guessing. Using this code we get a random user from the array and assign the role drawing to him while the others are automatically guessing.
-—- insert code of random user —-
+```
+socket.on("newRound", () => {
+    // nieuwe speler aanwijzen (random speler uit array)
+    while (activePlayer == "" || !users.includes(activePlayer)) {
+      activePlayer = users[Math.floor(Math.random() * users.length)];
+    }
+    io.emit("activePlayer", activePlayer);
+    console.log("De actieve speler is: ", activePlayer);
+
+    io.emit("newWord", currentWord);
+  });
+```
 
 ### Draw
 If you have the role Drawing, you have access to the canvas, you can see the word you need to draw, you have access to pick a color and decide the stroke width. And you also have the opportunity to start a new game.
@@ -55,7 +66,24 @@ If you are a guesser, you are able to guess in the chat. Thats it basically. You
 
 ### Win
 Once guessed correctly using this code: 
-— insert code for guesscorrect —
+```
+socket.on("won", (username) => {
+  won.style.setProperty("visibility", "visible");
+  won.innerHTML += `<img src="./img/crown.png" alt="User has won!" class="crown" /><p>${username} has won!</p>`;
+  });
+```
+```
+socket.on("guessText", (guess, guesser) => {
+    // matchen!
+    if (
+      guess.guess.toLowerCase() ===
+      wordArray.data[randomWord].word.toLowerCase()
+    ) {
+      console.log(guess.guesser, "has won!!");
+      io.emit("won", guess.guesser);
+    }
+  });
+```
 We compare the chat message and its coherent user with the random word that was generated and that will give a win message once the words match completely.
 
 ### New Round
@@ -73,44 +101,175 @@ The API consists of two columns: ID and Word.
 ### Message Event
 
 app.js
+```
+socket.on("message", (message) => {
+    io.emit("message", message);
+  });
+```
 Script.js
+```
+if (chatInput.value) {
+    socket.emit("message", { text: chatInput.value, name: username });
+    chatInput.value = "";
+  }
+```
 
 ### guessText Event
 
 app.js
+```
+socket.on("guessText", (guess, guesser) => {
+    if (
+      guess.guess.toLowerCase() ===
+      wordArray.data[randomWord].word.toLowerCase()
+    ) {
+      console.log(guess.guesser, "has won!!");
+      io.emit("won", guess.guesser);
+    }
+  });
+```
 Script.js
+```
+socket.on("won", (username) => {
+  won.style.setProperty("visibility", "visible");
+  won.innerHTML += `<img src="./img/crown.png" alt="User has won!" class="crown" /><p>${username} has won!</p>`;
+});
+
+socket.emit("guessText", { guess: message.text, guesser: message.name });
+```
 
 ### Disconnect Event
 
 app.js
+```
+socket.on("disconnect", () => {
+    users.splice(users.indexOf(socket.id), 1); // 2nd parameter means remove one item only
+  });
+```
 Script.js
 
 ### New Round Event
 
 app.js
+```
+socket.on("newRound", () => {
+    // nieuwe speler aanwijzen (random speler uit array)
+    while (activePlayer == "" || !users.includes(activePlayer)) {
+      activePlayer = users[Math.floor(Math.random() * users.length)];
+    }
+    io.emit("activePlayer", activePlayer);
+    
+    // woord emitten naar alle gebruikers
+    io.emit("newWord", currentWord);
+  });
+```
 Script.js
 
 ### Drawing Event
 
 app.js
+```
+socket.on("drawing", (draw) => {
+    io.emit("drawing", draw);
+  });
+```
 Script.js
+```
+socket.emit("drawing", {
+      x: newX,
+      y: newY,
+      stroke: context.lineWidth,
+      color: context.strokeStyle,
+    });
+  }
+  socket.on("drawing", drawEvent);
+```
 
-Start Event
+### Start Event
 
 app.js
+```
+ socket.on("start", (coord) => {
+    io.emit("start", coord);
+  });
+```
 Script.js
+```
+socket.on("start", (coord) => {
+  isMouseDown = true;
+  [x, y] = coord;
+});
 
-Stop Event
+startDrawing = (event) => {
+      socket.emit("start", [event.offsetX, event.offsetY]);
+    };
+```
+
+### Stop Event
 
 app.js
+```
+socket.on("stop", (coord) => {
+    io.emit("stop", coord);
+  });
+```
 Script.js
+```
+socket.on("stop", (coord) => {
+  if (!isMouseDown) return;
+  isMouseDown = false;
+  [x, y] = coord;
+  drawLine(coord);
+});
 
-Move Event
+stopDrawing = (event) => {
+      socket.emit("stop", [event.offsetX, event.offsetY]);
+    };
+```
+
+### Move Event
 
 app.js
+```
+socket.on("move", (coord) => {
+    io.emit("move", coord);
+  });
+```
 Script.js
+```
+socket.on("move", (coord) => {
+  if (!isMouseDown) return;
+  // [x, y] = coord;
 
-Reload Event
+  drawLine(coord);
+});
+
+onMouseMove = (event) => {
+      socket.emit("move", [event.offsetX, event.offsetY]);
+    };
+```
+
+### Reload Event
 
 app.js
+```
+socket.on("reload", () => {
+    randomWord = Math.floor(Math.random() * wordArray.data.length);
+    io.emit("reload");
+  });
+```
 Script.js
+```
+socket.on("reload", () => {
+  location.reload();
+  // hier waarschijnlijk
+});
+
+reloadButton.addEventListener(
+  "click",
+  () => {
+    socket.emit("reload");
+  },
+  false
+);
+```
