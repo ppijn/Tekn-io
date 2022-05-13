@@ -1,6 +1,6 @@
 # Tekn.io README
 
-## Table of Content
+## Table of Content 
 
 - [Introduction to concept](#introduction-to-concept)
 - [MoSCoW wish-list](#moscow-wish-list)
@@ -9,14 +9,14 @@
 - [Data Lifecycle Diagram](#data-lifecycle-diagram)
 - [Realtime Events](#realtime-socket-events)
 
- ## Introduction to concept
+ ## Introduction to concept❔
 
 For this course Real Time Web, we had to create some sort of multi users website that updates in real time. Events that you do or send to the server will therefore be send directly to the other clients as well. So with this in mind, I really wanted to create my version of Scribbl.io. Scribble io is a website where one person gets to draw a word while the others guess and can win when they guess correct. In my mind this was already way more then I can chew but i like a challenge. 
 
 This was my first concept sketch and after this quick sketch I went into coding directly.
 
 
-## MoSCoW wish-list
+## MoSCoW wish-list✅
 
 ### Must have
 - [x] Canvas for someone to draw on
@@ -39,7 +39,7 @@ This was my first concept sketch and after this quick sketch I went into coding 
 ### Want to have
 - [ ] I have everything I wanted to implemented:)
 
-## How does it work?
+## How does it work?🤷🏼‍♂️
 ### Login
 Once the client opens the website they get send to index.ejs where they see a username form which they need to fill in to participate. Once the username is filled in, it gets saved into the server using an array and the client gets send to the drawing room. Using the search params we get the username out of the url and this will be shown in the chat when a client chats
 
@@ -58,13 +58,13 @@ socket.on("newRound", () => {
   });
 ```
 
-### Draw
+### Draw✏️
 If you have the role Drawing, you have access to the canvas, you can see the word you need to draw, you have access to pick a color and decide the stroke width. And you also have the opportunity to start a new game.
  
 ### Guess
 If you are a guesser, you are able to guess in the chat. Thats it basically. You see the drawing and you can chat.
 
-### Win
+### Win👑
 Once guessed correctly using this code: 
 ```
 socket.on("won", (username) => {
@@ -93,10 +93,10 @@ Once a game is finished its the drawers role to start a new game. This button is
 I was searching for a very long time for an API that has random words to draw but I couldn’t find any good ones. I only wanted a few amount of words and the words needed to be drawable easily by everyone. Thats when I decided to create my own API using SupaBase. Supabase lets you create a table where you can put your own information in and it will automatically be generated as an API and supabase will give you an API key too. It was very easy and quite fast to make and it works perfectly. The words were handpicked and are easily to draw and very distinctive making the rounds short and fun. 
 The API consists of two columns: ID and Word.
 
-## Data Lifecycle Diagram
+## Data Lifecycle Diagram♼
 
 
-## Realtime Socket Events
+## Realtime Socket Events🧦
 
 ### Message Event
 
