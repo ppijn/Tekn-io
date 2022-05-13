@@ -1,154 +1,279 @@
-# Real-Time Web @cmda-minor-web 2021 - 2022
+# Tekn.io README
 
-## Table of Contents
-- [Synopsis](#synopsis)
-- [Description](#description)
-- [Communication](#communication)
-- [Goals](#goals)
-- [Grading](#grading)
-- [Programme](#programme)
+![Tekn io screenshot](https://github.com/ppijn/Tekn-io/blob/main/Screenshot%202022-05-13%20at%2012.08.54.png)
 
-## Synopsis
-- Course: Real-Time Web
-- Course Coordinator: Justus Sturkenboom ([@ju5tu5](https://github.com/ju5tu5))
-- Minor Coordinator(s): Joost Faber ([@joostf](https://github.com/joostf)) Koop Reynders ([@KoopReynders](https://github.com/KoopReynders))
-- Lecturers: Shyanta Vleugel ([@shyanta](https://github.com/shyanta)) & Justus Sturkenboom ([@ju5tu5](https://github.com/ju5tu5))
-- Student Assistants: Daan Korver ([@daankorver](https://github.com/DaanKorver))
-- Credit: 3 ECTS credits
-- Academic year: 2021-2022
-- Programme: Communication and Multimedia Design (full time bachelor)
-- Language: Dutch instructions and English resources
+## Table of Content 
 
-## Description
-During this course you will learn how to build a real-time application. You will learn techniques to setup an open connection between the client and the server. This will enable you to send data in real-time both ways, at the same time.
+- [Introduction to concept](#introduction-to-concept)
+- [MoSCoW wish-list](#moscow-wish-list)
+- [How does it work](#how-does-it-work)
+- [About the API](#about-the-api)
+- [Data Lifecycle Diagram](#data-lifecycle-diagram)
+- [Realtime Events](#realtime-socket-events)
 
-## Communication
-- [Github](https://github.com/cmda-minor-web/real-time-web-2122)
-- [Microsoft Teams](https://teams.microsoft.com/l/channel/19%3a2b5ac900b14c4b68a31dc5dbb380dcbe%40thread.tacv2/06%2520-%2520Real%2520Time%2520web)
-- [Brightspace](https://dlo.mijnhva.nl/d2l/home/324147)
+ ## Introduction to concept❔
 
-If you have questions:
-- [Look at the additional resources]()
-- [Use a search engine like startpage](https://www.startpage.com/)
-- [Ask questions on MS Teams](https://teams.microsoft.com/l/channel/19%3a2b5ac900b14c4b68a31dc5dbb380dcbe%40thread.tacv2/06%2520-%2520Real%2520Time%2520web) (please help each other!)
-- [Contact a student-assisstant](#synopsis)
-- [Contact a lecturer](#synopsis)
+For this course Real Time Web, we had to create some sort of multi users website that updates in real time. Events that you do or send to the server will therefore be send directly to the other clients as well. So with this in mind, I really wanted to create my version of Scribbl.io. Scribble io is a website where one person gets to draw a word while the others guess and can win when they guess correct. In my mind this was already way more then I can chew but i like a challenge. 
 
-## Goals
-After finishing this program you can:
-- _deal with real-time complexity;_
-- _handle real-time client-server interaction;_
-- _handle real-time data management;_
-- _handle multi-user support._
-
-## Grading
-Your efforts will be graded using a single point rubric (see below). You will have to pass the criterion (centre column) to pass the course. During the test you will be consulted and will be given feedback on things we think deficient and things we think are an improvement on the criterion.
-
-| Deficiency | Criterion | Improvement |
-|:--|:--|:--|
-|  | *Project* Your app is working and published on Heroku. Your project is thoroughly documented in the `README.md` file in your repository. Included are a description of the data-lifecycle, real-time events and external data source used by your app. |  |
-|  | *Complexity* You’ve implemented enough real-time functionality for us to test your comprehension of the subject. A lot of functionality is self-written. You are able to manipulate online examples live. |  |
-|  | *Client-server interaction* By interacting with the app, a user can influence the data model of the server in real time by directly modifying data OR by influencing API requests between server and source. The student has set up the data manipulations. |  |
-|  | *Data management* The server maintains a data model and each client is continuously updated with the correct data. |  |
-|  | *Multi-user support* Multiple clients can connect to the server. Interaction works as expected and is not dependent on the number of clients. You can explain how your app approaches this. |  |
-
-## Programme
-
-### Daily Schedule
-To keep things simple we use a daily schedule that will be used during normal course days (monday/tuesday). We make exceptions for fridays, on these days a different schedule will be given.
-
-| Time | Who | Activity |
-|:--|:--|:--|
-| *~09:00* | *(Shyanta, Justus)* | *Standup* |
-| 09:30 | Tribe *+(Shyanta, Justus)* | Talk with crucial information (make sure you attend!) |
-| 11:00 | Tribe | Work on the (day)assignment |
-|  | Team 1 *+(Shyanta)* | Standup |
-|  | Team 2 *+(Justus)* | Standup |
-| 11:20 | Team 3 *+(Shyanta)* | Standup |
-|  | Team 4 *+(Justus)* | Standup |
-| 11.40 | Team 5 *+(Shyanta)* | Standup |
-|  | Team 6 *+(Justus)* | Standup |
-| 12.00 | Team 7 *+(Shyanta)* | Standup |
-|  | Team 8 *+(Justus)* | Standup |
-| 12.20 | Team 9 *+(Shyanta)* | Standup |
-|  | Team 20 *+(Justus)* | Standup |
-| 13:00 | Tribe *+(Daan, Justin)* | Continue work on the (day)assignment |
-| 16:00ish | Tribe | Wrapup |
-
-### Week 1 - Getting a grip
-Goal: Build and deploy a simple but unique real-time app
-
-#### Tuesday 19 April 
-**Talk subjects:** Hit the ground running... [(slides)](https://docs.google.com/presentation/d/1Z-zOIDvFB0P2qGHV0F74n9T4kprgybJ_8GYU-1MaKfM/edit?usp=sharing) Course objective and explanation of the assignment, examples from last year, explanation of real-time, (live coded) bare bone chat app and deployment on Heroku.\
-**Day assignment:** [(assignment)](./course/week-1.md#assignment-1-make-it-so) Make it so *(as a team)*: Implement (code/style/discuss/deploy) basic chat (or other realtime) functionality on your teampage!
-
-#### Friday 22 April
-**Talk subjects:** My first realtime web app! [(slides)](https://docs.google.com/presentation/d/18eftO3epzIXDjdwl3cn5Wq99fkQYCUnExUqq9P72A3k/edit?usp=sharing) Short recap, (local) data management, using (wire) flows for realtime web apps, (live coded) multi-user woordzoeker.\
-**Day assignment:** [(assignment)](./course/week-1.md#assignment-2-make-it-so) Make it so *(individually)*. i) Create (code/style/discuss/deploy) a chat app (or other realtime functionality) based on the examples and ii) add your own unique feature!
-
-### Week 2 - Sockets and data
-Goal: Store, manipulate and share data between server-client   
-
-#### Monday 25 April
-**Talk subjects:** Data driven development?! [(slides)](https://docs.google.com/presentation/d/1WC1DxkQm2eUCTQp7dEfv0cTVMK7zlg3der0P0qP7S5I/edit?usp=sharing) Feedback about last week, final assignment and conditions (rubric), explanation of data management, (live coded) Long polling vs Websockets. \
-**Day assignment:** [(assignment)](./course/week-2.md#assignment-1-proof-of-concept) (Proof of) Concept *(individually)*. i) Create a (3 > 1) concept based on existing data from an API and ii) map this data using modelling techniques.
-
-#### Tuesday 26 April
-**Talk subjects:** Above all else, show the data. [(slides)](https://docs.google.com/presentation/d/1tW4klrDjt1AfWte311uKkfQYwaHwokzQ-ue3a4VphqA/edit?usp=sharing) Securing real-time web apps, offline support, the publication/subscription model and (case study) Quek!\
-**Day assignment:** [(assignment)](./course/week-2.md#assignment-2-proof-of-concept) Proof of concept *(individually)*: i) Create (code/style/discuss/deploy) part of the core functionality for your concept and ii) show the  corresponding data lifecycle diagram.
-
-#### Friday 29 April
-Instead of our talk we will have a [peer review session](./course/peer-review.md). You will read, comment and fire issues on each others code. Doing this is really good for your programming insight and helps others refining/refactoring their code.
-
-| Time | Who | Activity |
-|:--|:--|:--|
-| | Tribe *+(Shyanta, Justus)* | Peer review |
-
-### Week 3 - Dealing with multiple users
-Goal: Handle data sharing and multi-user support 
-
-#### Monday 9 May
-**Talk subjects:** Roll your own... [(slides) ](https://docs.google.com/presentation/d/1Cx9qCo8QQXH5Btbtwg0L61so-wn2OxFQZdphIhbumQk/edit?usp=sharing) Data management, the functional programming trinity (map, filter and reduce). OAuth?!
-**Day assignment:** [(assignment)](./course/week-3.md#assignment-1-data-management)
-
-#### Tuesday 10 May
-**Talk subjects:** Not ignoring the UI-Stack! [(slides)](https://docs.google.com/presentation/d/1ACuUJ-B19hgFN2CCTYH8ClN0WD69ok8ZVnkRGbU0FjA/edit?usp=sharing). Usability, feedback, feedforward etc. in real-time web apps, (case study) postNL loader and FAQ.
-**Day assignment:** [(assignment)](./course/week-3.md#assignment-2-user-testing)
-
-#### Friday 13 May
-We will have our final [peer review session](./course/peer-review.md). You will read, comment and fire issues on each others code. Doing this helps others dotting the i’s on their project.
-
-| Time | Who | Activity |
-|:--|:--|:--|
-| | Tribe *+(Shyanta, Justus)* | Peer review |
-| | Tribe *+(Shyanta, Justus)* | Finalize your assignment |
-| 16.00 | Tribe *+(Shyanta, Justus)* | (drinks?!) |
+This was my first concept sketch and after this quick sketch I went into coding directly.
+![First Sketch](https://github.com/ppijn/Tekn-io/blob/main/ppijn-sketch.jpeg)
 
 
-<!-- Here are some hints for your project! -->
+## MoSCoW wish-list✅
 
-<!-- Start out with a title and a description -->
+### Must have
+- [x] Canvas for someone to draw on
+- [x] Login page for client to create username
+- [x] Chat for people to guess in
+- [x] See username next to chat
+- [x] Have random word generated from my own API
+- [x] Have different roles
+- [x] Have a winning screen when someone guessed correct
+- [x] Start new game button
+- [x] Look visually pleasing 
 
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
+### Should have
+- [x] User list (updated)
+- [ ] Only one winning message 
 
-<!-- Add a link to your live demo in Github Pages 🌐-->
+### Could have
+- [ ] Better drawing experience with socket
 
-<!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
+### Want to have
+- [ ] I have everything I wanted to implemented:)
 
-<!-- Maybe a table of contents here? 📚 -->
+## How does it work?🤷🏼‍♂️
+### Login
+Once the client opens the website they get send to index.ejs where they see a username form which they need to fill in to participate. Once the username is filled in, it gets saved into the server using an array and the client gets send to the drawing room. Using the search params we get the username out of the url and this will be shown in the chat when a client chats
 
-<!-- ☝️ replace this description with a description of your own work -->
+### Roles
+Once they have joined the room, they will be assigned a role either drawing or guessing. Using this code we get a random user from the array and assign the role drawing to him while the others are automatically guessing.
+```
+socket.on("newRound", () => {
+    // nieuwe speler aanwijzen (random speler uit array)
+    while (activePlayer == "" || !users.includes(activePlayer)) {
+      activePlayer = users[Math.floor(Math.random() * users.length)];
+    }
+    io.emit("activePlayer", activePlayer);
+    console.log("De actieve speler is: ", activePlayer);
 
-<!-- How about a section that describes how to install this project? 🤓 -->
+    io.emit("newWord", currentWord);
+  });
+```
 
-<!-- ...but how does one use this project? What are its features 🤔 -->
+### Draw✏️
+If you have the role Drawing, you have access to the canvas, you can see the word you need to draw, you have access to pick a color and decide the stroke width. And you also have the opportunity to start a new game.
+ 
+### Guess
+If you are a guesser, you are able to guess in the chat. Thats it basically. You see the drawing and you can chat.
 
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
+### Win👑
+Once guessed correctly using this code: 
+```
+socket.on("won", (username) => {
+  won.style.setProperty("visibility", "visible");
+  won.innerHTML += `<img src="./img/crown.png" alt="User has won!" class="crown" /><p>${username} has won!</p>`;
+  });
+```
+```
+socket.on("guessText", (guess, guesser) => {
+    // matchen!
+    if (
+      guess.guess.toLowerCase() ===
+      wordArray.data[randomWord].word.toLowerCase()
+    ) {
+      console.log(guess.guesser, "has won!!");
+      io.emit("won", guess.guesser);
+    }
+  });
+```
+We compare the chat message and its coherent user with the random word that was generated and that will give a win message once the words match completely.
 
-<!-- This would be a good place for your data life cycle ♻️-->
+### New Round
+Once a game is finished its the drawers role to start a new game. This button is only seen by the drawer. What the button does is it reloads every screen using socket. And because of this the roles get reshuffled and a new word is generated. Without causing any errors.
 
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
+## About the API
+I was searching for a very long time for an API that has random words to draw but I couldn’t find any good ones. I only wanted a few amount of words and the words needed to be drawable easily by everyone. Thats when I decided to create my own API using SupaBase. Supabase lets you create a table where you can put your own information in and it will automatically be generated as an API and supabase will give you an API key too. It was very easy and quite fast to make and it works perfectly. The words were handpicked and are easily to draw and very distinctive making the rounds short and fun. 
+The API consists of two columns: ID and Word.
 
-<!-- We all stand on the shoulders of giants, please link all the sources you used in to create this project. -->
+## Data Lifecycle Diagram♼
 
-<!-- How about a license here? When in doubt use GNU GPL v3. 📜  -->
+![Data Lifecycle Diagram](https://github.com/ppijn/Tekn-io/blob/main/ppijn-cycle.jpeg)
+
+## Realtime Socket Events🧦
+
+### Message Event
+
+app.js
+```
+socket.on("message", (message) => {
+    io.emit("message", message);
+  });
+```
+Script.js
+```
+if (chatInput.value) {
+    socket.emit("message", { text: chatInput.value, name: username });
+    chatInput.value = "";
+  }
+```
+
+### guessText Event
+
+app.js
+```
+socket.on("guessText", (guess, guesser) => {
+    if (
+      guess.guess.toLowerCase() ===
+      wordArray.data[randomWord].word.toLowerCase()
+    ) {
+      console.log(guess.guesser, "has won!!");
+      io.emit("won", guess.guesser);
+    }
+  });
+```
+Script.js
+```
+socket.on("won", (username) => {
+  won.style.setProperty("visibility", "visible");
+  won.innerHTML += `<img src="./img/crown.png" alt="User has won!" class="crown" /><p>${username} has won!</p>`;
+});
+
+socket.emit("guessText", { guess: message.text, guesser: message.name });
+```
+
+### Disconnect Event
+
+app.js
+```
+socket.on("disconnect", () => {
+    users.splice(users.indexOf(socket.id), 1); // 2nd parameter means remove one item only
+  });
+```
+Script.js
+
+### New Round Event
+
+app.js
+```
+socket.on("newRound", () => {
+    // nieuwe speler aanwijzen (random speler uit array)
+    while (activePlayer == "" || !users.includes(activePlayer)) {
+      activePlayer = users[Math.floor(Math.random() * users.length)];
+    }
+    io.emit("activePlayer", activePlayer);
+    
+    // woord emitten naar alle gebruikers
+    io.emit("newWord", currentWord);
+  });
+```
+Script.js
+
+### Drawing Event
+
+app.js
+```
+socket.on("drawing", (draw) => {
+    io.emit("drawing", draw);
+  });
+```
+Script.js
+```
+socket.emit("drawing", {
+      x: newX,
+      y: newY,
+      stroke: context.lineWidth,
+      color: context.strokeStyle,
+    });
+  }
+  socket.on("drawing", drawEvent);
+```
+
+### Start Event
+
+app.js
+```
+ socket.on("start", (coord) => {
+    io.emit("start", coord);
+  });
+```
+Script.js
+```
+socket.on("start", (coord) => {
+  isMouseDown = true;
+  [x, y] = coord;
+});
+
+startDrawing = (event) => {
+      socket.emit("start", [event.offsetX, event.offsetY]);
+    };
+```
+
+### Stop Event
+
+app.js
+```
+socket.on("stop", (coord) => {
+    io.emit("stop", coord);
+  });
+```
+Script.js
+```
+socket.on("stop", (coord) => {
+  if (!isMouseDown) return;
+  isMouseDown = false;
+  [x, y] = coord;
+  drawLine(coord);
+});
+
+stopDrawing = (event) => {
+      socket.emit("stop", [event.offsetX, event.offsetY]);
+    };
+```
+
+### Move Event
+
+app.js
+```
+socket.on("move", (coord) => {
+    io.emit("move", coord);
+  });
+```
+Script.js
+```
+socket.on("move", (coord) => {
+  if (!isMouseDown) return;
+  // [x, y] = coord;
+
+  drawLine(coord);
+});
+
+onMouseMove = (event) => {
+      socket.emit("move", [event.offsetX, event.offsetY]);
+    };
+```
+
+### Reload Event
+
+app.js
+```
+socket.on("reload", () => {
+    randomWord = Math.floor(Math.random() * wordArray.data.length);
+    io.emit("reload");
+  });
+```
+Script.js
+```
+socket.on("reload", () => {
+  location.reload();
+  // hier waarschijnlijk
+});
+
+reloadButton.addEventListener(
+  "click",
+  () => {
+    socket.emit("reload");
+  },
+  false
+);
+```
