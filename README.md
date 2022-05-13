@@ -13,7 +13,7 @@
 
  ## Introduction to concept❔
 
-For this course Real Time Web, we had to create some sort of multi users website that updates in real time. Events that you do or send to the server will therefore be send directly to the other clients as well. So with this in mind, I really wanted to create my version of Scribbl.io. Scribble io is a website where one person gets to draw a word while the others guess and can win when they guess correct. In my mind this was already way more then I can chew but i like a challenge. 
+For this course Real Time Web, we had to create some sort of multi users website that updates in real time. Events that you do or send to the server will therefore be send directly to the other clients as well. So with this in mind, I really wanted to create my version of Scribbl.io. Scribble io is a website where one person gets to draw a word while the others guess and can win when they guess correct. In my mind this was already way more then I can chew but i like a challenge. Having no experience with javascript and especially with this kind of javascript, this was very challenging for me and I am very proud of what has come out of this project. 
 
 This was my first concept sketch and after this quick sketch I went into coding directly.
 ![First Sketch](https://github.com/ppijn/Tekn-io/blob/main/ppijn-sketch.jpeg)
