@@ -1,5 +1,7 @@
 # Tekn.io README
 
+![Tekn io screenshot](https://github.com/ppijn/Tekn-io/blob/main/Screenshot%202022-05-13%20at%2012.08.54.png)
+
 ## Table of Content 
 
 - [Introduction to concept](#introduction-to-concept)
@@ -14,6 +16,7 @@
 For this course Real Time Web, we had to create some sort of multi users website that updates in real time. Events that you do or send to the server will therefore be send directly to the other clients as well. So with this in mind, I really wanted to create my version of Scribbl.io. Scribble io is a website where one person gets to draw a word while the others guess and can win when they guess correct. In my mind this was already way more then I can chew but i like a challenge. 
 
 This was my first concept sketch and after this quick sketch I went into coding directly.
+![First Sketch](https://github.com/ppijn/Tekn-io/blob/main/ppijn-sketch.jpeg)
 
 
 ## MoSCoW wish-list✅
@@ -95,6 +98,7 @@ The API consists of two columns: ID and Word.
 
 ## Data Lifecycle Diagram♼
 
+![Data Lifecycle Diagram](https://github.com/ppijn/Tekn-io/blob/main/ppijn-cycle.jpeg)
 
 ## Realtime Socket Events🧦
 
